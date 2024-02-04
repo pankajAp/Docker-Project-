@@ -1,0 +1,279 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Dashboard</h4>
+            </li>
+            <!--<li class="breadcrumb-item bcrumb-1">-->
+            <!--<a routerLink="/admin/dashboard/main">-->
+            <!--<i class="fas fa-home"></i> Home</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item active">Dashboard</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+        <!--<div class="card">-->
+          <!--<div class="header">-->
+            <!--<h2>Ongoing Academic Activity</h2>-->
+          <!--</div>-->
+          <!--<div class="tableBody">-->
+            <!--<div class="table-responsive">-->
+              <!--<table class="table display product-overview mb-30" style="width: 100%;" id="support_table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                  <!--<th style="width: 5%;">Sr. No.</th>-->
+                  <!--<th style="width: 10%;">Academic Year</th>-->
+                  <!--<th style="width: 15%;">Subject</th>-->
+                  <!--<th style="width: 15%;">Topic</th>-->
+                  <!--<th style="width: 7%;">TLM</th>-->
+                  <!--<th style="width: 15%;">Faculty</th>-->
+                  <!--<th style="width: 8%;">Mode</th>-->
+                  <!--<th style="width: 15%;">Time</th>-->
+                  <!--<th style="width: 10%;">Join</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<ng-container *ngFor="let row of stdOngoingTimetableSchedules; let i = index;">-->
+                  <!--<tr-->
+                    <!--*ngIf="row.rtsReplaceEmployeeId != null && row.rtsReplaceEmployeeId != '' && row.rtsReplaceIsApproved">-->
+                    <!--<td>{{i+1}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.rtsReplaceTitleName + " " + row.rtsReplaceEmployeeFullname}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.rtsReplaceIsOnline; else rtsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #rtsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                    <!--<td><a href="{{row.tsnUrl}}" target="_blank">Join Call</a></td>-->
+                  <!--</tr>-->
+                  <!--<tr-->
+                    <!--*ngIf="(row.rtsReplaceEmployeeId == null || row.rtsReplaceEmployeeId == '') && !row.rtsReplaceIsApproved">-->
+                    <!--<td>{{i + 1}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.titleName + " " + row.empFullName}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.tsIsOnline; else tsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #tsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td><a href="{{row.tsnUrl}}" target="_blank">Join Call</a></td>-->
+                  <!--</tr>-->
+                <!--</ng-container>-->
+                <!--</tbody>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    <!--<div class="row clearfix">-->
+      <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+        <!--<div class="card">-->
+          <!--<div class="header">-->
+            <!--<h2>Upcoming Academic Activity</h2>-->
+          <!--</div>-->
+          <!--<div class="tableBody">-->
+            <!--<div class="table-responsive">-->
+              <!--<table class="table display product-overview mb-30" style="width: 100%;" id="support_table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                  <!--<th style="width: 5%;">Sr. No.</th>-->
+                  <!--<th style="width: 10%;">Academic Year</th>-->
+                  <!--<th style="width: 15%;">Subject</th>-->
+                  <!--<th style="width: 15%;">Topic</th>-->
+                  <!--<th style="width: 7%;">TLM</th>-->
+                  <!--<th style="width: 15%;">Faculty</th>-->
+                  <!--<th style="width: 8%;">Mode</th>-->
+                  <!--<th style="width: 15%;">Time</th>-->
+                  <!--<th style="width: 10%;">&nbsp;</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<ng-container *ngFor="let row of stdUpcomingTimetableSchedules; let i = index;">-->
+                  <!--<tr-->
+                    <!--*ngIf="row.rtsReplaceEmployeeId != null && row.rtsReplaceEmployeeId != '' && row.rtsReplaceIsApproved">-->
+                    <!--<td>{{i + 1}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.rtsReplaceTitleName + " " + row.rtsReplaceEmployeeFullname}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.rtsReplaceIsOnline; else rtsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #rtsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                  <!--</tr>-->
+                  <!--<tr-->
+                    <!--*ngIf="(row.rtsReplaceEmployeeId == null || row.rtsReplaceEmployeeId == '') && !row.rtsReplaceIsApproved">-->
+                    <!--<td>{{i+1}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.titleName + " " + row.empFullName}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.tsIsOnline; else tsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #tsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                  <!--</tr>-->
+                <!--</ng-container>-->
+                <!--</tbody>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row clearfix">-->
+      <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+        <!--<div class="card">-->
+          <!--<div class="header">-->
+            <!--<h2>Completed Academic Activity</h2>-->
+          <!--</div>-->
+          <!--<div class="tableBody">-->
+            <!--<div class="table-responsive">-->
+              <!--<table class="table display product-overview mb-30" style="width: 100%;" id="support_table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                  <!--<th style="width: 5%;">Sr. No.</th>-->
+                  <!--<th style="width: 10%;">Academic Year</th>-->
+                  <!--<th style="width: 15%;">Subject</th>-->
+                  <!--<th style="width: 15%;">Topic</th>-->
+                  <!--<th style="width: 7%;">TLM</th>-->
+                  <!--<th style="width: 15%;">Faculty</th>-->
+                  <!--<th style="width: 8%;">Mode</th>-->
+                  <!--<th style="width: 15%;">Time</th>-->
+                  <!--<th style="width: 10%;">&nbsp;</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<ng-container *ngFor="let row of stdCompletedTimetableSchedules">-->
+                  <!--<tr-->
+                    <!--*ngIf="row.rtsReplaceEmployeeId != null && row.rtsReplaceEmployeeId != '' && row.rtsReplaceIsApproved">-->
+                    <!--<td>{{row.tsId}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.rtsReplaceTitleName + " " + row.rtsReplaceEmployeeFullname}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.rtsReplaceIsOnline; else rtsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #rtsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                  <!--</tr>-->
+                  <!--<tr-->
+                    <!--*ngIf="(row.rtsReplaceEmployeeId == null || row.rtsReplaceEmployeeId == '' && !row.rtsReplaceIsApproved)">-->
+                    <!--<td>{{row.tsId}}</td>-->
+                    <!--<td>{{row.className}}</td>-->
+                    <!--<td>-->
+                        <!--<span-->
+                          <!--*ngIf="!row.rtsReplaceSubjectName; else replaceSubject">{{row.subjectName.split(",").join(",\n")}}</span>-->
+                      <!--<ng-template #replaceSubject>-->
+                        <!--{{row.rtsReplaceSubjectName}}-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{row.topicName}}</td>-->
+                    <!--<td>{{row.tlmName}}</td>-->
+                    <!--<td>-->
+                      <!--{{row.titleName + " " + row.empFullName}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<span *ngIf="row.tsIsOnline; else tsElseIsOnlineBlock">Online</span>-->
+                      <!--<ng-template #tsElseIsOnlineBlock>-->
+                        <!--Offline-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                    <!--<td>{{"2021-02-14 " + row.tsFromTime | date: "shortTime"}} - {{"2021-02-14 " + row.tsTillTime |-->
+                      <!--date: "shortTime"}}-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                  <!--</tr>-->
+                <!--</ng-container>-->
+                <!--</tbody>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+</section>

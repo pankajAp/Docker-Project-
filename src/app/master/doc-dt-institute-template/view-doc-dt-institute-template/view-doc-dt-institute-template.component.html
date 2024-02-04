@@ -1,0 +1,109 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Short Exam</h4>
+            </li>
+            <!--<li class="breadcrumb-item bcrumb-1">-->
+            <!--<a routerLink="/admin/dashboard/main">-->
+            <!--<i class="fas fa-home"></i> Home</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item bcrumb-2">-->
+            <!--<a routerLink="/teacher/online-exam/all-doc-financial-correspondences">Online Exam</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item active">View</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <!--<div class="header">-->
+          <!--<h2>Question Answer</h2>-->
+          <!--</div>-->
+          <div class="body" id="dvOnlineExam">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+                <table border="0px" class="table" style="width: 100%;">
+                  <tbody>
+                  <tr>
+                    <td><strong>Course : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].courseName }} </span>
+                    </td>
+                    <td><strong>Class : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].className }} </span>
+                    </td>
+                    <td><strong>Subject : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].subjectName }} </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Online Exam Description : </strong>
+                    </td>
+                    <td colspan="2"><span>{{ docDtInstituteTemplateData[0].examDescription }} </span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Exam Date : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].examDate }} </span>
+                    </td>
+                    <td><strong>Exam Start Time : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].examStartTime }} </span>
+                    </td>
+                    <td><strong>Exam End Time : </strong>
+                      <span>{{ docDtInstituteTemplateData[0].examEndTime }} </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="overflow: auto;">
+              <table class="table" style="width: 100%;">
+                <thead class="thead-light">
+                <tr>
+                  <th>Question Description</th>
+                  <th>Question Mark</th>
+                  <th>Answer First</th>
+                  <th>Is Correct Answer First</th>
+                  <th>Answer Second</th>
+                  <th>Is Correct Answer Second</th>
+                  <th>Answer Third</th>
+                  <th>Is Correct Answer Third</th>
+                  <th>Answer Fourth</th>
+                  <th>Is Correct Answer Fourth</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let field of fieldArray; let i = index">
+                  <td> {{ field.questionDescription }}</td>
+                  <td> {{ field.markQuestion }}</td>
+                  <td> {{ field.ansFirst }}</td>
+                  <td> {{ field.isCorrectAns1 }}</td>
+                  <td> {{ field.ansSecond }}</td>
+                  <td> {{ field.isCorrectAns2 }}</td>
+                  <td> {{ field.ansThree }}</td>
+                  <td> {{ field.isCorrectAns3 }}</td>
+                  <td> {{ field.ansFour }}</td>
+                  <td> {{ field.isCorrectAns4 }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1 text-center">
+                <input type="button"
+                       style="height: 42px;background: #5f779a;border: none;width: 100%;color: white;margin: 10px;"
+                       (click)="onPrint('dvOnlineExam')" value="Print !"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

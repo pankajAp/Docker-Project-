@@ -1,0 +1,29 @@
+[
+  {
+    "timetable_id": "001",
+    "timetable_title": "Timetable A",
+    "timetable_batch_id": "1",
+    "batch_name": "2020-21",
+    "timetable_course_id": "1",
+    "course_name": "MBBS",
+    "timetable_class_id": "1",
+    "class_name": "First Year MBBS",
+    "timetable_from_date": "2020-01-20",
+    "timetable_till_date": "2020-12-31",
+    "timetable_remark": "Remark A"
+  },
+  {
+    "timetable_id": "002",
+    "timetable_title": "Timetable B",
+    "timetable_batch_id": "2",
+    "batch_name": "2020-21",
+    "timetable_course_id": "2",
+    "timetable_class_id": "2",
+    "course_name": "BAMS",
+    "timetable_class_id": "1",
+    "class_name": "First Year BAMS",
+    "timetable_from_date": "2020-01-20",
+    "timetable_till_date": "2020-12-31",
+    "timetable_remark": "Remark A"
+  }
+]

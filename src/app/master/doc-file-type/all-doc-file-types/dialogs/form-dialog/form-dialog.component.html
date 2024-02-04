@@ -1,0 +1,86 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Edit File Linking with Type of Document
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" enctype="multipart/form-data" [formGroup]="editDocFileTypeForm"
+          (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>1. Select Institute</mat-label>
+            <mat-select [formControl]="editDocFileTypeForm.controls.dftInstituteId.get('instituteId')"
+                        required>
+              <mat-option *ngFor="let institute of orgInstituteDropdownList" [value]="institute.instituteId">
+                {{institute.instituteName}}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="editDocFileTypeForm.controls.dftInstituteId.get('instituteId').hasError('required')">
+              Institute is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>2. Select Type of Correspondence</mat-label>
+            <mat-select [formControl]="editDocFileTypeForm.controls.dftCorrespondenceId.get('correspondenceId')"
+                        (selectionChange)="getDocFileAndDocType($event)"
+                        required>
+              <mat-option *ngFor="let correspondence of mstCorrespondenceDropdownList" [value]="correspondence.correspondenceId">
+                {{correspondence.correspondenceName}}
+              </mat-option>
+            </mat-select>
+            <!--<mat-error-->
+            <!--*ngIf="editDocFileTypeForm.controls.dftCorrespomdenceId.get('correspomdenceId').hasError('required')">-->
+            <!--Type of Correspondence is required-->
+            <!--</mat-error>-->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>3. Select File Number</mat-label>
+            <mat-select [formControl]="editDocFileTypeForm.controls.dftDfId.get('dfId')"
+                        required>
+              <mat-option *ngFor="let docFile of mstDocFileDropdownList" [value]="docFile.dfId">
+                {{docFile.dfNo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <ng-multiselect-dropdown [placeholder]="'4. Select Type of Document'" formControlName="dftDtId"
+                                   [settings]="dropdownSettings" [data]="mstDocTypeDropdownList"
+                                   [(ngModel)]="selectedItems"
+                                   (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            <ng-template #optionsTemplate let-item let-option="option" let-id="dtId"
+                         let-isSelected="isSelected">
+              {{dtName}}
+            </ng-template>
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button class="mr-3" [disabled]="!editDocFileTypeForm.valid " mat-raised-button color="primary">Submit
+          </button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

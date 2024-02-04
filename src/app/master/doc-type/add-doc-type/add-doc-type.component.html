@@ -1,0 +1,89 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Add Type of Document</h4>
+            </li>
+            <!--<li class="breadcrumb-item bcrumb-1">-->
+            <!--<a routerLink="/admin/dashboard/main">-->
+            <!--<i class="fas fa-home"></i> Home</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item bcrumb-2">-->
+            <!--<a routerLink="/master/action/all-fee-categorys">Action</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item active">Add</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2> Add New Type of Document</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="docTypeForm" (ngSubmit)="onSubmit();">
+              <!-- timetableForm.reset(); -->
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Serial Number</mat-label>
+                    <input matInput formControlName="dtSrNo" required>
+                    <mat-error *ngIf="docTypeForm.get('dtSrNo').hasError('required')">
+                      Serial Number is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Type of Correspondence</mat-label>
+                    <mat-select [formControl]="docTypeForm.controls.dtCorrespondenceId.get('correspondenceId')"
+                                required>
+                      <mat-option *ngFor="let correspondence of mstCorrespondenceDropdownList" [value]="correspondence.correspondenceId">
+                        {{correspondence.correspondenceName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="docTypeForm.controls.dtCorrespondenceId.get('correspondenceId').hasError('required')">
+                      Correspondece Type is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Type of Document</mat-label>
+                    <input matInput formControlName="dtName" required>
+                    <mat-error *ngIf="docTypeForm.get('dtName').hasError('required')">
+                      Type of Document is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Type of Document Prefix</mat-label>
+                    <input matInput formControlName="dtPrefix" required>
+                    <mat-error *ngIf="docTypeForm.get('dtPrefix').hasError('required')">
+                      Type of Document Prefix is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="mr-3" [disabled]="!docTypeForm.valid " mat-raised-button color="primary">Submit</button>
+                  <button type="button" (click)="goBack()" mat-button>Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

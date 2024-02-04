@@ -1,0 +1,71 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Edit User Role Action
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editUserRoleActionForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="row">
+            <input type="hidden" [formControl]="editUserRoleActionForm.get('roleActionId')">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+
+              <ng-select [formControl]="editUserRoleActionForm.get('userId')">
+                <ng-option *ngFor="let user of userList" [value]="user.user_id">
+                  {{user.user_fullname}}
+                </ng-option>
+              </ng-select>
+
+
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Select Role</mat-label>
+                <mat-select required [formControl]="editUserRoleActionForm.controls.userRoleId.get('roleId')">
+                  <mat-option *ngFor="let role of roleList" [value]="role.roleId">
+                    {{ role.roleName }}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="roleActionForm.get('roleId').hasError('required')">
+                        Role is required
+                      </mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <ng-multiselect-dropdown [placeholder]="'Select Actions'" formControlName="userActionId"
+                                       [settings]="dropdownSettings" [data]="actionList" [(ngModel)]="selectedItems"
+                                       (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                <ng-template #optionsTemplate let-item let-option="option" let-id="actionId"
+                             let-isSelected="isSelected">
+                  {{ action.actionName }}
+                </ng-template>
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button type="submit" class="mr-3" mat-raised-button color="primary">Submit</button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+    {{ editUserRoleActionForm.value | json}}
+  </div>
+</div>

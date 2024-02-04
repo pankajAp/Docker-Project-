@@ -1,0 +1,178 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Reschedule Timetable
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editTimetableScheduleForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Timetable</mat-label>
+            <mat-select formControlName="rtsTimetableId" (selectionChange)="getInSubjectDropdown($event.value)" required
+                        readonly>
+              <mat-option *ngFor="let timetable of stdTimetableDropdownList" [value]="timetable.timetableId">
+                {{timetable.timetableName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsTimetableId').hasError('required')">
+              Timetable is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Day</mat-label>
+            <mat-select formControlName="rtsDayId" required readonly>
+              <mat-option *ngFor="let day of mstDayDropdownList" [value]="day.dayId">
+                {{day.dayName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsDayId').hasError('required')">
+              Day is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>From Time</mat-label>
+            <input matInput formControlName="rtsFromTime" [owlDateTimeTrigger]="rtsFromTime" [owlDateTime]="rtsFromTime"
+                   readonly>
+            <mat-icon matSuffix [owlDateTimeTrigger]="rtsFromTime" class="date-icon">schedule</mat-icon>
+            <owl-date-time [pickerType]="'timer'" #rtsFromTime></owl-date-time>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsFromTime').hasError('required')">
+              From time is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Till Time</mat-label>
+            <input matInput formControlName="rtsTillTime" [owlDateTimeTrigger]="rtsTillTime" [owlDateTime]="rtsTillTime"
+                   readonly>
+            <mat-icon matSuffix [owlDateTimeTrigger]="rtsTillTime" class="date-icon">schedule</mat-icon>
+            <owl-date-time [pickerType]="'timer'" #rtsTillTime></owl-date-time>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsTillTime').hasError('required')">
+              Till time is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Subject</mat-label>
+            <mat-select formControlName="rtsSubjectId" required readonly>
+              <mat-option *ngFor="let subject of inSubjectDropdownList" [value]="subject.subjectId">
+                {{subject.subjectName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsSubjectId').hasError('required')">
+              Subject is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Teaching Faculty</mat-label>
+            <mat-select formControlName="rtsEmployeeId" required readonly>
+              <mat-option *ngFor="let employee of empEmployeeDropdownList" [value]="employee.employeeId">
+                {{employee.titleName+ " " +employee.empFullName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsEmployeeId').hasError('required')">
+              Teaching Faculty is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Online / Offline</mat-label>
+            <mat-select formControlName="rtsIsOnline" required readonly>
+              <mat-option [value]="1">
+                Online
+              </mat-option>
+              <mat-option [value]="0">
+                Offline
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editTimetableScheduleForm.get('rtsIsOnline').hasError('required')">
+              Online/Offline is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <fieldset>
+        <legend>Replace Schedule With</legend>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Select Subject</mat-label>
+              <mat-select formControlName="rtsReplaceSubjectId" required>
+                <mat-option *ngFor="let subject of inSubjectDropdownList" [value]="subject.subjectId">
+                  {{subject.subjectName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editTimetableScheduleForm.get('rtsReplaceSubjectId').hasError('required')">
+                Subject is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Select Teaching Faculty</mat-label>
+              <mat-select formControlName="rtsReplaceEmployeeId" required>
+                <mat-option *ngFor="let employee of empEmployeeDropdownList" [value]="employee.employeeId">
+                  {{employee.titleName+ " " +employee.empFullName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editTimetableScheduleForm.get('rtsReplaceEmployeeId').hasError('required')">
+                Teaching Faculty is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Select Online / Offline</mat-label>
+              <mat-select formControlName="rtsReplaceIsOnline" required>
+                <mat-option [value]="1">
+                  Online
+                </mat-option>
+                <mat-option [value]="0">
+                  Offline
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editTimetableScheduleForm.get('rtsReplaceIsOnline').hasError('required')">
+                Is Online Schedule is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button class="mr-3" [disabled]="!editTimetableScheduleForm.valid " mat-raised-button color="primary">Submit
+          </button>
+          <button type="button" (click)="onNoClick()" mat-button tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

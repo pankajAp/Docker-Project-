@@ -1,0 +1,74 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Edit File Configuration
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editDocTypeForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Serial Number</mat-label>
+            <input matInput formControlName="dtSrNo" required>
+            <mat-error *ngIf="editDocTypeForm.get('dtSrNo').hasError('required')">
+              Serial Number is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <!-- <input type="text" [formControl]="editRoleActionForm.get('raId')"> -->
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select Type of Correspondence</mat-label>
+            <mat-select required [formControl]="editDocTypeForm.controls.dtCorrespondenceId.get('correspondenceId')">
+              <mat-option *ngFor="let correspondence of mstCorrespondenceDropdownList" [value]="correspondence.correspondenceId">
+                {{correspondence.correspondenceName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editDocTypeForm.controls.dtCorrespondenceId.get('correspondenceId').hasError('required')">
+              Type of Correspondence is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type of Document</mat-label>
+            <input matInput formControlName="dtName" required>
+            <mat-error *ngIf="editDocTypeForm.get('dtName').hasError('required')">
+              Type of Document is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type of Document Prefix</mat-label>
+            <input matInput formControlName="dtPrefix" required>
+            <mat-error *ngIf="editDocTypeForm.get('dtPrefix').hasError('required')">
+              Type of Document Prefix is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button type="submit" class="mr-3" [disabled]="!editDocTypeForm.valid " mat-raised-button color="primary">
+            Submit
+          </button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

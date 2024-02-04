@@ -1,0 +1,74 @@
+stages:
+    - build
+    - test
+    - deploy
+
+image: node:16.15.0-alpine
+
+cache:
+    paths:
+        - node_modules/
+
+build-THS_HELPDESK_DEMO:
+    stage: build
+    rules:
+        - if: $CI_COMMIT_BRANCH == "THS_HELPDESK_DEMO"
+    script:
+        # Install dependencies
+        - npm install
+        # Build App
+        - npm run build
+    artifacts:
+        paths:
+            # Build folder
+            - dist
+        expire_in: 1 hour
+
+include:
+    - template: Security/SAST.gitlab-ci.yml
+sast-THS_HELPDESK_DEMO:
+    stage: test
+    rules:
+        - if: $CI_COMMIT_BRANCH == "THS_HELPDESK_DEMO"
+    script:
+        - echo "SAST Testing"
+deploy-THS_HELPDESK_DEMO:
+    stage: deploy
+    script:
+        - npm install -g firebase-tools
+        - firebase use --token $FIREBASE_TOKEN default
+        - firebase deploy --only hosting -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID"   --non-interactive --token $FIREBASE_TOKEN
+    rules:
+        - if: $CI_COMMIT_BRANCH == "THS_HELPDESK_DEMO"        
+
+build-main:
+    stage: build
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+    script:
+        # Install dependencies
+        - npm install
+        # Build App
+        - npm run build
+    artifacts:
+        paths:
+            # Build folder
+            - dist
+        expire_in: 1 hour
+
+include:
+    - template: Security/SAST.gitlab-ci.yml
+sast-main:
+    stage: test
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+    script:
+        - echo "SAST Testing"
+deploy-main:
+    stage: deploy
+    script:
+        - npm install -g firebase-tools
+        - firebase use --token $FIREBASE_TOKEN default
+        - firebase deploy --only hosting -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID"   --non-interactive --token $FIREBASE_TOKEN
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"        

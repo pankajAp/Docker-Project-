@@ -1,0 +1,36 @@
+$display: none
+$display1: block
+$position: absolute
+$background-color: #fff
+$width: 200px
+$z-index: 1
+$padding: 10px
+$line-height: 150%
+$border-radius: 10px
+$text-overflow: ellipsis
+$white-space: nowrap
+$overflow: hidden
+
+.dropdown-content
+  display: $display
+  position: $position
+  padding: $padding
+  background-color: $background-color
+  width: $width !important
+  z-index: $z-index
+  border-radius: $border-radius
+  overflow: $overflow
+  text-overflow: $text-overflow
+  white-space: $white-space
+
+.dropdown:hover .dropdown-content
+  display: $display1
+  overflow: $overflow
+  text-overflow: $text-overflow
+  white-space: $white-space
+
+.dropdown-content a
+  line-height: $line-height
+  overflow: $overflow
+  text-overflow: $text-overflow
+  white-space: $white-space

@@ -1,0 +1,63 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Edit Role Action
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editStudentDocumentFeeCategoryForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <!-- <input type="text" [formControl]="editRoleActionForm.get('raId')"> -->
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Select Role Action</mat-label>
+                <mat-select required [formControl]="editStudentDocumentFeeCategoryForm.controls.sdfcFcId.get('fcId')">
+                  <mat-option *ngFor="let fc of feeCategoryList" [value]="fc.fcId">
+                    {{ fc.fcCategoryName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="editStudentDocumentFeeCategoryForm.controls.sdfcFcId.get('fcId').hasError('required')">
+                  Fee category is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" style="display: contents;">
+              <span class="col-md-3" *ngFor="let studentDocument of studentDocumentFeeCategoryArray">
+                <label *ngIf="studentDocument.isChecked; else other_content">
+                  <input type="checkbox" checked="checked"
+                         (change)="onChange(studentDocument.sdId, $event.target.checked)"> {{studentDocument.sdName}}
+                </label>
+                <ng-template #other_content>
+                  <input type="checkbox" (change)="onChange(studentDocument.sdId, $event.target.checked)"> {{studentDocument.sdName}}
+                </ng-template>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button type="submit" class="mr-3" mat-raised-button
+                  color="primary">Submit
+          </button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+    {{ studentDocumentArray | json }}
+  </div>
+</div>

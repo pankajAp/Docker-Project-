@@ -1,0 +1,22 @@
+[
+    {
+        "actionId": "01",
+        "actionName": "Action 1"
+    },
+    {
+        "actionId": "02",
+        "actionName": "Action 2"
+    },
+    {
+        "actionId": "03",
+        "actionName": "Action 3"
+    },
+    {
+        "actionId": "04",
+        "actionName": "Action 4"
+    },
+    {
+        "actionId": "05",
+        "actionName": "Action 5"
+    }
+]

@@ -1,0 +1,336 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">CMS Helpdesk Queries</h4>
+            </li>
+            <!--<li class="breadcrumb-item bcrumb-1">-->
+              <!--<a routerLink="/admin/dashboard/main">-->
+                <!--<i class="fas fa-home"></i> Home</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item bcrumb-2">-->
+              <!--<a href="#" onClick="return false;">Maintenance Helpdesk Querys</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item active">All</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!--<mat-tab-group>-->
+          <!--<mat-tab>-->
+            <!--<ng-template mat-tab-label>-->
+              <!--<i class="material-icons-two-tone pr-3">list_alt</i>-->
+              <!--List View-->
+            <!--</ng-template>-->
+            <!--<div class="mt-5">-->
+              <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+                <div class="card">
+                  <div class="body">
+                    <div class="table-responsive">
+                      <div class="materialTableHeader materialTableHeader-custom-width">
+                        <div class="row">
+                          <div class="col-8">
+                            <ul class="header-buttons-left ml-0">
+                              <li class="dropdown">
+                                <h2>
+                                  <strong>List of Received CMS Helpdesk Queries</strong></h2>
+                              </li>
+                              <li class="dropdown m-l-20">
+                                <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                                <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                                  aria-label="Search box">
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10" [hidden]=!selection.hasValue()>
+                                  <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
+                                    <mat-icon class="col-white">delete
+                                    </mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10">
+                                  <input type="radio" name="isComplaintJobAssignTo" checked value="false" (change)="loadData('Pending for Assign')"> Pending for Assign
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10">
+                                  <input type="radio" name="isComplaintJobAssignTo" value="true" (change)="loadData('Assigned')">  Assigned
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10">
+                                  <input type="radio" name="isComplaintJobAssignTo" value="true" (change)="loadData('Closed By Assignee')">  Closed By Assignee
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10">
+                                  <input type="radio" name="isComplaintJobAssignTo" value="true" (change)="loadData('Closed By SMBT')">  Closed By SMBT
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col-4">
+                            <ul class="header-buttons">
+                              <li>
+                                <!--<div class="icon-button-demo">-->
+                                  <!--<button mat-mini-fab color="primary" [routerLink]="['../add-helpdesk-query']">-->
+                                    <!--<mat-icon class="col-white">add</mat-icon>-->
+                                  <!--</button>-->
+                                <!--</div>-->
+                              </li>
+                              <li>
+                                <div class="icon-button-demo">
+                                  <button mat-mini-fab color="primary">
+                                    {{dataSource.filteredData.length}}
+                                  </button>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo">
+                                  <button mat-mini-fab color="primary" (click)="refresh()">
+                                    <mat-icon class="col-white">refresh
+                                    </mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="icon-button-demo">
+                                  <button mat-mini-fab color="primary" (click)="exportexcel()">
+                                    <mat-icon class="col-white">download</mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell mat-table-custom-width">
+                        <!--<ng-container matColumnDef="semesterId">-->
+                          <!--<mat-header-cell *matHeaderCellDef mat-sort-header>Id-->
+                          <!--</mat-header-cell>-->
+                          <!--<mat-cell *matCellDef="let row">{{row.semesterId}}</mat-cell>-->
+                        <!--</ng-container>-->
+                        <ng-container matColumnDef="hqId" sticky>
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Sr. No.
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let element; let i = index;"> {{i+1}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqNo" sticky>
+                          <mat-header-cell class="mat-complaint-no" *matHeaderCellDef mat-sort-header>CMS Helpdesk Query No
+                          </mat-header-cell>
+                          <mat-cell class="mat-complaint-no" *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqNo}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqDatetime" sticky>
+                          <mat-header-cell class="mat-date" *matHeaderCellDef mat-sort-header>Date
+                          </mat-header-cell>
+                          <mat-cell class="mat-date" *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="justify-content: center !important;">
+                            {{ row.hqDatetime | date:'dd-MM-yyyy' }} <br/>
+                            {{ row.hqDatetime | date:'shortTime' }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="userFullname" sticky>
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>User Name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{ row.hqUserId?.userFullname }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="moduleName" sticky>
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Module
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqModuleId?.moduleName}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="smName" sticky>
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Sub Module
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqSmId?.smName}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqDescription">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 270px;" sticky>Description of Query
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="min-width: 270px;"> {{row.hqDescription}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqAttachment">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Attachment
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="justify-content: center !important;">
+                            <a target="_blank" href="{{imagePath + row.hqAttachment}}" *ngIf="row.hqAttachment != null && row.hqAttachment != ''" title="View Attachment" mat-raised-button color="accent" (click)="$event.stopPropagation()">
+                              <mat-icon>pageview</mat-icon> View
+                            </a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqAssignTo">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Assign To
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqAssignTo}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqRemark">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 270px;">Assign To Remark
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="min-width: 270px;"> {{row.hqRemark}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqStatus">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Assign Status
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqStatus}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqAssignDatetime">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 85px;">Assigned Date
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="justify-content: center !important;min-width: 85px;">
+                            {{ row.hqAssignDatetime | date:'dd-MM-yyyy' }} <br/>
+                            {{ row.hqAssignDatetime | date:'shortTime' }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqAssigneeRemark">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 270px;">Assignee Closure Remark
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="min-width: 270px;"> {{row.hqAssigneeRemark}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqCloseDatetime">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 85px;">Assignee Closure Date
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="justify-content: center !important;min-width: 85px;">
+                            {{ row.hqCloseDatetime | date:'dd-MM-yyyy' }} <br/>
+                            {{ row.hqCloseDatetime | date:'shortTime' }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqAssigneeStatus">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Assignee Status
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqAssigneeStatus}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqClosureRemark">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 270px;">SMBT Closure Remark
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="min-width: 270px;"> {{row.hqClosureRemark}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqClosureDatetime">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 85px;">SMBT Closure Date
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)" style="justify-content: center !important;min-width: 85px;">
+                            {{ row.hqClosureDatetime | date:'dd-MM-yyyy' }} <br/>
+                            {{ row.hqClosureDatetime | date:'shortTime' }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="hqClosureStatus">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>SMBT Closure Status
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> {{row.hqClosureStatus}}
+                          </mat-cell>
+                        </ng-container>
+                        <!-- actions -->
+                        <ng-container matColumnDef="actions">
+                          <mat-header-cell class="pr-0" *matHeaderCellDef>Action
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row; let i=index;" class="pr-0" style="justify-content: center !important;">
+                            <!-- <button mat-icon-button color="accent" class="btn-tbl-search"
+                                    (click)="$event.stopPropagation()" title="View Semester" (click)="viewCall(row)"> -->
+                              <!--<mat-icon aria-label="View" class="col-white">view-->
+                              <!--</mat-icon>-->
+                              <!-- <mat-icon [ngStyle]="{'color':'#736d6d'}" [ngStyle]="{'font-size':'36px'}">pageview</mat-icon>
+                            </button> -->
+                            <button (click)="$event.stopPropagation()" (click)="editCall(row)" title="Assign To" *ngIf="checkPermission('Assign Helpdesk Query')">
+                              <img src="assets/images/dashboard-images/arrow-right-square.svg" />
+                            </button> &nbsp; &nbsp;
+                            <button (click)="$event.stopPropagation()" (click)="editCallClosure(row)" title="Closure By SMBT" *ngIf="checkPermission('Closure Helpdesk Query')">
+                              <img src="assets/images/dashboard-images/check-square.svg" />
+                            </button>
+                            <!--<button mat-icon-button color="accent" class="btn-tbl-delete"-->
+                              <!--(click)="$event.stopPropagation()" (click)="deleteItem(row)">-->
+                              <!--<mat-icon aria-label="Delete" class="col-white">delete-->
+                              <!--</mat-icon>-->
+                            <!--</button>-->
+                          </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+                        </mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple>
+                        </mat-row>
+                      </mat-table>
+                      <!-- Loading spinner -->
+                      <div *ngIf="exampleDatabase.isTblLoading" class="tbl-spinner">
+                        <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                        </mat-progress-spinner>
+                      </div>
+                      <!-- context menu start -->
+                      <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+                        [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+                      </div>
+                      <mat-menu #contextMenu="matMenu">
+                        <!--<ng-template matMenuContent let-item="item">-->
+                          <!--<button mat-menu-item (click)="addNew()">-->
+                            <!--<mat-icon>add_box</mat-icon>-->
+                            <!--<span>Add Record</span>-->
+                          <!--</button>-->
+                          <!--<button mat-menu-item (click)="editCall(item)">-->
+                            <!--<mat-icon>create</mat-icon>-->
+                            <!--<span>Edit Record</span>-->
+                          <!--</button>-->
+                          <!--<button mat-menu-item (click)="deleteItem(item)">-->
+                            <!--<mat-icon>delete</mat-icon>-->
+                            <!--<span>Delete Record</span>-->
+                          <!--</button>-->
+                          <!--<button mat-menu-item (click)="refresh()">-->
+                            <!--<mat-icon>refresh</mat-icon>-->
+                            <!--<span>Refresh Record</span>-->
+                          <!--</button>-->
+                          <!--<button mat-menu-item disabled>-->
+                            <!--<mat-icon>no_encryption</mat-icon>-->
+                            <!--<span>Disable</span>-->
+                          <!--</button>-->
+                          <!--<button mat-menu-item [matMenuTriggerFor]="nestedmenu">-->
+                            <!--<mat-icon>list_alt</mat-icon>-->
+                            <!--<span> Nested Menu</span>-->
+                          <!--</button>-->
+                        <!--</ng-template>-->
+                      </mat-menu>
+                      <mat-menu #nestedmenu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>mail_outline</mat-icon>
+                          <span>Item 1</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>call</mat-icon>
+                          <span>Item 2</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>chat</mat-icon>
+                          <span>Item 3</span>
+                        </button>
+                      </mat-menu>
+                      <!-- context menu end -->
+                      <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
+                        [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                        No results
+                      </div>
+                      <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0"
+                        [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                      </mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              <!--</div>-->
+            <!--</div>-->
+          <!--</mat-tab>-->
+        <!--</mat-tab-group>-->
+      </div>
+    </div>
+  </div>
+</section>

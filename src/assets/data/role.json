@@ -1,0 +1,18 @@
+[
+    {
+        "roleId": "01",
+        "roleNmae": "User"
+    },
+    {
+        "roleId": "02",
+        "roleNmae": "Admin"
+    },
+    {
+        "roleId": "03",
+        "roleNmae": "Editor"
+    },
+    {
+        "roleId": "04",
+        "roleNmae": "Nurse"
+    }
+]

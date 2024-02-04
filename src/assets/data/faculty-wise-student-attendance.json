@@ -1,0 +1,122 @@
+[
+  {
+    "subjectName": "Anatomy",
+    "tsDate": "2021-12-20",
+    "tsName": "Introduction",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "95",
+    "totalNoOfAbsentStudents": "5",
+    "attendancePercentage": "95%"
+  },
+  {
+    "subjectName": "Physiology",
+    "tsDate": "2021-12-20",
+    "tsName": "Introduction",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "92",
+    "totalNoOfAbsentStudents": "8",
+    "attendancePercentage": "92%"
+  },
+  {
+    "subjectName": "Biochemistry",
+    "tsDate": "2021-12-20",
+    "tsName": "Introduction",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "95",
+    "totalNoOfAbsentStudents": "5",
+    "attendancePercentage": "95%"
+  },
+  {
+    "subjectName": "Micro Biology",
+    "tsDate": "2021-12-20",
+    "tsName": "Introduction",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "84",
+    "totalNoOfAbsentStudents": "16",
+    "attendancePercentage": "84%"
+  },
+  {
+    "subjectName": "Anatomy",
+    "tsDate": "2021-12-21",
+    "tsName": "Topic 1",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "89",
+    "totalNoOfAbsentStudents": "11",
+    "attendancePercentage": "89%"
+  },
+  {
+    "subjectName": "Physiology",
+    "tsDate": "2021-12-21",
+    "tsName": "Topic 1",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "72",
+    "totalNoOfAbsentStudents": "28",
+    "attendancePercentage": "72%"
+  },
+  {
+    "subjectName": "Biochemistry",
+    "tsDate": "2021-12-21",
+    "tsName": "Topic 1",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "85",
+    "totalNoOfAbsentStudents": "15",
+    "attendancePercentage": "85%"
+  },
+  {
+    "subjectName": "Micro Biology",
+    "tsDate": "2021-12-21",
+    "tsName": "Topic 2",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "92",
+    "totalNoOfAbsentStudents": "8",
+    "attendancePercentage": "92%"
+  },
+  {
+    "subjectName": "Anatomy",
+    "tsDate": "2021-12-22",
+    "tsName": "Topic 2",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "87",
+    "totalNoOfAbsentStudents": "13",
+    "attendancePercentage": "87%"
+  },
+  {
+    "subjectName": "Physiology",
+    "tsDate": "2021-12-22",
+    "tsName": "Topic 2",
+    "tlmName": "SDL",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "89",
+    "totalNoOfAbsentStudents": "11",
+    "attendancePercentage": "89%"
+  },
+  {
+    "subjectName": "Biochemistry",
+    "tsDate": "2021-12-22",
+    "tsName": "Topic 2",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "71",
+    "totalNoOfAbsentStudents": "29",
+    "attendancePercentage": "71%"
+  },
+  {
+    "subjectName": "Micro Biology",
+    "tsDate": "2021-12-22",
+    "tsName": "Introduction",
+    "tlmName": "Lecture",
+    "totalNoOfStudents": "100",
+    "totalNoOfPresentStudents": "62",
+    "totalNoOfAbsentStudents": "38",
+    "attendancePercentage": "62%"
+  }
+]

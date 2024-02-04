@@ -1,0 +1,179 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Edit Template Configuration</h4>
+            </li>
+            <!--<li class="breadcrumb-item bcrumb-1">-->
+            <!--<a routerLink="/teacher/dashboard">-->
+            <!--<i class="fas fa-home"></i> Home</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item bcrumb-2">-->
+            <!--<a routerLink="/teacher/online-exam/all-doc-financial-correspondences" onClick="return false;">Online Exam</a>-->
+            <!--</li>-->
+            <!--<li class="breadcrumb-item active">Edit</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <!--<div class="header">-->
+          <!--<h2>Edit Student Question Answer</h2>-->
+          <!--</div>-->
+          <div class="body">
+            <form class="m-4" [formGroup]="editDocDtInstituteTemplateForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>1. Select Institute</mat-label>
+                    <mat-select [formControl]="editDocDtInstituteTemplateForm.controls.dditInstituteId.get('instituteId')"
+                                required>
+                      <mat-option>--Select Institute--</mat-option>
+                      <mat-option *ngFor="let institute of orgInstituteDropdownList" [value]="institute.instituteId">
+                        {{institute.instituteName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="editDocDtInstituteTemplateForm.controls.dditInstituteId.get('instituteId').hasError('required')">
+                      Institute is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>2. Select Type of Document</mat-label>
+                    <mat-select [formControl]="editDocDtInstituteTemplateForm.controls.dditDtId.get('dtId')" required>
+                      <mat-option>--Select Type of Document--</mat-option>
+                      <mat-option *ngFor="let docType of mstDocTypeDropdownList" [value]="docType.dtId">
+                        {{docType.dtName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="editDocDtInstituteTemplateForm.controls.dditDtId.get('dtId').hasError('required')">
+                      Type of Document is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>3. Select DOA Amount</mat-label>
+                    <mat-select [formControl]="editDocDtInstituteTemplateForm.controls.dditDaId.get('daId')" required>
+                      <mat-option>--Select DOA Amount--</mat-option>
+                      <mat-option *ngFor="let doaAmount of mstDoaAmountDropdownList" [value]="doaAmount.daId">
+                        {{doaAmount.daName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="editDocDtInstituteTemplateForm.controls.dditDaId.get('daId').hasError('required')">
+                      DOA Amount is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-1">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Template Flow Description</mat-label>
+                    <input matInput formControlName="dditDescription" required>
+                    <mat-error *ngIf="editDocDtInstituteTemplateForm.get('dditDescription').hasError('required')">
+                      Template Flow Description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-1">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Template Flow Step</mat-label>
+                    <input matInput formControlName="dditNoOfSteps" required>
+                    <mat-error *ngIf="editDocDtInstituteTemplateForm.get('dditNoOfSteps').hasError('required')">
+                      Template Flow Step is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1">
+                  <button type="button" class="btn btn-primary" (click)="addFieldValue()">Add</button>
+                </div>
+              </div>
+              <div style="overflow: auto;">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                  <tr>
+                    <th>Institute</th>
+                    <th>Designation</th>
+                    <th>User</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let field of fieldArray; let i = index">
+                    <td>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Select Institute</mat-label>
+                        <mat-select [(ngModel)]="field.duInstituteId" formArrayName="duInstituteId"
+                                    [ngModelOptions]="{standalone: true}"
+                                    (selectionChange)="getDesignationByInstituteIdDropdown($event, i)" >
+                          <mat-option>--Select Institute--</mat-option>
+                          <mat-option *ngFor="let institute of orgInstituteDropdownList"
+                                      [value]="institute.instituteId">
+                            {{institute.instituteName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <input matInput [(ngModel)]="field.instituteName" readonly [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Select Designation</mat-label>
+                        <mat-select [(ngModel)]="field.duDesignationId" formArrayName="duDesignationId"
+                                    (selectionChange)="getUserByDesignationIdDropdown($event, i)"
+                                    [ngModelOptions]="{standalone: true}" >
+                          <mat-option>--Select Designation--</mat-option>
+                          <mat-option *ngFor="let designation of inDesignationDropdownList"
+                                      [value]="designation.designationId">
+                            {{designation.positionName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <input matInput [(ngModel)]="field.designationName" readonly [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Select User</mat-label>
+                        <mat-select [(ngModel)]="field.duUserId" formArrayName="duUserId"
+                                    (selectionChange)="getSelectedUser($event, i)"
+                                    [ngModelOptions]="{standalone: true}">
+                          <mat-option>--Select User--</mat-option>
+                          <mat-option *ngFor="let user of userDropdownList" [value]="user.user_id">
+                            {{user.user_fullname}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <input matInput [(ngModel)]="field.userFullname" readonly [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td>
+                      <button class="btn btn-default" type="button" (click)="deleteFieldValue(i)"
+                              style="color: red;"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 text-center">
+                  <button class="mr-3" [disabled]="!editDocDtInstituteTemplateForm.valid" mat-raised-button
+                          color="primary">Submit
+                  </button>
+                  <button type="button" (click)="goBack()" mat-button>Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

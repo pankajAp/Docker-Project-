@@ -1,0 +1,153 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Assign CMS Helpdesk Query
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editMstHelpdeskQueryForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput [ngModel]="hqDatetime" [ngModelOptions]="{standalone: true}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>User</mat-label>
+            <input matInput [ngModel]="userFullname" [ngModelOptions]="{standalone: true}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>User Mobile</mat-label>
+            <input matInput formControlName="hqUserMobile" readonly>
+            <mat-error *ngIf="editMstHelpdeskQueryForm.get('hqUserMobile').hasError('required')">
+              User Mobile is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select Module</mat-label>
+            <mat-select [formControl]="editMstHelpdeskQueryForm.controls.hqModuleId.get('moduleId')" readonly>
+              <mat-option *ngFor="let module of mstModuleDropdownList" [value]="module.moduleId">
+                {{module.moduleName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editMstHelpdeskQueryForm.controls.hqModuleId.get('moduleId').hasError('required')">
+              Module is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select Sub Module</mat-label>
+            <mat-select [formControl]="editMstHelpdeskQueryForm.controls.hqSmId.get('smId')" readonly>
+              <mat-option *ngFor="let sm of mstSubModuleDropdownList" [value]="sm.smId">
+                {{sm.smName}}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="editMstHelpdeskQueryForm.controls.hqSmId.get('smId').hasError('required')">
+              Sub Module is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Helpdesk Query Details</mat-label>
+            <textarea matInput formControlName="hqDescription" readonly></textarea>
+            <!--<input matInput formControlName="hqDescription">-->
+            <mat-error *ngIf="editMstHelpdeskQueryForm.get('hqDescription').hasError('required')">
+              Helpdesk Query Details is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select Type Of Query</mat-label>
+            <mat-select [formControl]="editMstHelpdeskQueryForm.get('hqTypeOfQuery')">
+              <mat-option value="">-- Select--</mat-option>
+              <mat-option value="Execution">Execution</mat-option>
+              <mat-option value="Development">Development</mat-option>
+              <mat-option value="Master">Master</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="editMstHelpdeskQueryForm.get('hqTypeOfQuery').hasError('required')">
+              Type Of Query is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select Assign To</mat-label>
+            <mat-select [formControl]="editMstHelpdeskQueryForm.get('hqAssignTo')" >
+              <mat-option value="">-- Select--</mat-option>
+              <!--<mat-option value="CellBeans Dev">CellBeans Dev</mat-option>-->
+              <!--<mat-option value="Execution Team">Execution Team</mat-option>-->
+              <!--<mat-option value="SMBT IT">SMBT IT</mat-option>-->
+              <mat-option *ngFor="let staff of staffList" value="staff.staffName">{{staff.staffName}}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="editMstHelpdeskQueryForm.get('hqAssignTo').hasError('required')">
+              Assign To is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2 readonly-wrapper">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput [ngxMatDatetimePicker]="picker"
+                   placeholder="Choose a date" formControlName="hqAssignDatetime"
+                   [min]="minDate" [max]="maxDate"
+                   [(ngModel)]="currentStringDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker
+                                     [showSpinners]="showSpinners"
+                                     [showSeconds]="showSeconds"
+                                     [stepHour]="stepHour" [stepMinute]="stepMinute"
+                                     [stepSecond]="stepSecond"
+                                     [touchUi]="touchUi"
+                                     [color]="color">
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Remark</mat-label>
+            <textarea matInput formControlName="hqRemark"></textarea>
+            <mat-error *ngIf="editMstHelpdeskQueryForm.get('hqRemark').hasError('required')">
+              Remark is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button type="submit" class="mr-3" [disabled]="!editMstHelpdeskQueryForm.valid " mat-raised-button
+                  color="primary">Submit
+          </button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='teachers.img' alt="avatar">-->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            Edit Role Action
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="editRoleActionForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <!-- <input type="text" [formControl]="editRoleActionForm.get('raId')"> -->
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Select Role Action</mat-label>
+                <mat-select required [formControl]="editRoleActionForm.controls.raRoleId.get('roleId')">
+                  <mat-option *ngFor="let role of roleList" [value]="role.roleId">
+                    {{ role.roleName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="editRoleActionForm.controls.raRoleId.get('roleId').hasError('required')">
+                  Role is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" style="display: contents;">
+              <span class="col-md-3" *ngFor="let roleAction of roleActionArray">
+                <label *ngIf="roleAction.isChecked;else other_content">
+                  <input type="checkbox" checked="checked"
+                         (change)="onChange(roleAction.actionId, $event.target.checked)"> {{roleAction.actionName}}
+                </label>
+                <ng-template #other_content>
+                  <input type="checkbox" (change)="onChange(roleAction.actionId, $event.target.checked)"> {{roleAction.actionName}}
+                </ng-template>
+              </span>
+              <!-- <div *ngFor="let action of actionList">
+                <div *ngFor="let singleAction of ActionsListByRoleId">
+                  <div *ngIf="action.actionId == singleAction.raActionId.actionId">
+                    <span class="col-md-3" *ngFor="let action of actionList; let i=index">
+                      <input type="checkbox" [checked]="isChecked" [formControl]="editRoleActionForm.controls.raActionId.get('actionId')" (change)="onChange(action.actionId, $event.target.checked)"> {{action.actionName}}
+                  </span>
+                  </div>
+                  <div *ngIf="action.actionId != singleAction.raActionId.actionId">
+                    <span class="col-md-3" *ngFor="let action of actionList; let i=index">
+                      <input type="checkbox" [formControl]="editRoleActionForm.controls.raActionId.get('actionId')" (change)="onChange(action.actionId, $event.target.checked)"> {{action.actionName}}
+                  </span>
+                  </div>
+
+                </div>
+              </div>
+                -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button type="submit" class="mr-3" mat-raised-button
+                  color="primary">Submit
+          </button>
+          <button type="button" mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+    <!--{{ editRoleActionForm.value | json }}-->
+  </div>
+</div>

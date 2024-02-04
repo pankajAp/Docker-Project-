@@ -1,0 +1,213 @@
+<nav #navbar class="navbar active">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" onClick="return false;" class="navbar-toggle collapsed"
+         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
+      <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
+      <a class="navbar-brand" routerLink={{homePage}}>
+        <!--<img src="#" alt="" />-->
+        <!--<span class="logo-name">SMBT</span>-->
+        <li class="sidebar-user-panel" style="list-style: none;">
+          <!--<div class="user-panel">-->
+          <!--<div class=" image">-->
+          <!--<img src={{userImg}} class="img-circle user-img-circle" alt="User Image" />-->
+          <!--</div>-->
+          <!--</div>-->
+          <div class="profile-usertitle">
+            <div class="sidebar-userpic-name">{{userFullName}}</div>
+            <div class="profile-usertitle-job ">
+              <!-- <span *ngIf="userType == 'HOI'" >
+                HOI
+              </span>
+              <span *ngIf="userType == 'Admin'; else elseBlock;" >
+                Admin
+              </span>
+              <ng-template #elseBlock>
+                {{userType}}
+              </ng-template>-->
+            </div>
+            <div class="profile-usertitle-job ">
+              <!--<span *ngIf="userType == 'Teacher'; else elseBlock;">Faculty</span>-->
+              <!--<ng-template #elseBlock>{{userType}}</ng-template>-->
+            </div>
+          </div>
+        </li>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed" style="background-color: #f6d5e5;">
+      <ul class="pull-left collapse-menu-icon">
+        <li>
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
+      </ul>
+      <ul style="display: inline-block; margin-bottom: 0px; line-height: 60px; padding-left: 35px;">
+        <li>
+          <!--{{instituteName}}-->
+          <!--<img src="{{logoPath}}" alt="" style="height: 50px;"/>-->
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isUserAccessMultipleColleges == true">
+          <div class="dropdown">
+            <span><img src="assets/images/institute.png" class="img img-responsive"
+                       style="height: 25px; width: 25px;"/> </span>
+            <div class="dropdown-content">
+              <ul>
+                <a *ngFor="let row of orgInstitutes" (click)="changeInstituteId(row.instituteId, row.instituteName)"
+                   style="cursor: pointer;">
+                  <li>{{row.instituteName}}</li>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+        </li>
+        <!-- #END# Full Screen Button -->
+        <!-- #START# Notifications-->
+        <li class="nav-item" ngbDropdown>
+          <button mat-icon-button ngbDropdownToggle class="nav-notification-icons">
+            <mat-icon>notifications_none</mat-icon>
+            <span class="label-count bg-orange"></span>
+          </button>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 250px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li *ngFor="let notification of orgNotificationList">
+                  <a
+                    *ngIf="(notification.tsnIsSessionClosed != true && notification.tsnIsSessionStarted == true && studentId != null)"
+                    [routerLink]="['/student/vc-session']"
+                    [queryParams]="{tsnUrl: notification.tsnUrl+'#config.startWithAudioMuted=true&config.startWithVideoMuted=true', 'tsnId': notification.tsnId}">
+                    <!--  target="_blank" (click)="startVcSession(notification.tsnUrl)"-->
+                    <span class="table-img msg-user">
+                      <img src="{{notification.user_image}}" src="{{notification.user_image}}"
+                           onerror="this.src='assets/images/admin.png';" alt="">
+                    </span>
+                    <span class="menu-info">
+                      <span class="menu-title">Online Lecture by <span
+                        *ngIf="(notification.rtsReplaceTitleName != null && notification.rtsReplaceTitleName != ''); else titleName">{{notification.rtsReplaceTitleName}}</span>
+                        <ng-template #titleName>{{notification.titleName}}</ng-template>
+                        <span
+                          *ngIf="(notification.rtsReplaceEmployeeFullname != null && notification.rtsReplaceEmployeeFullname != ''); else fullName">{{notification.rtsReplaceEmployeeFullname}}</span> <ng-template
+                          #fullName>{{notification.empFullName}}</ng-template> of
+                          <span
+                            *ngIf="(notification.rtsReplaceSubjectName != null && notification.rtsReplaceSubjectName != ''); else subjectName">{{notification.rtsReplaceSubjectName}}</span> <ng-template
+                          #subjectName>{{notification.subjectName}}</ng-template></span>
+                      <span class="menu-desc">
+                        <i class="material-icons">access_time</i> {{ "2021-02-07 "+ notification.tsFromTime | date:'shortTime' }} - {{ "2021-02-07 "+ notification.tsTillTime | date:'shortTime' }}
+                      </span>
+                      <span class="menu-desc">{{notification.notification_text}}</span>
+                    </span>
+                  </a>
+                  <a
+                    *ngIf="(notification.tsnIsSessionClosed != true && notification.tsnIsSessionStarted == true && employeeId != null)"
+                    href="{{ notification.tsnUrl }}" target="_blank">
+                    <!-- (click)="startVcSession(notification.tsnUrl)"-->
+                    <span class="table-img msg-user">
+                      <img src="{{notification.user_image}}" src="{{notification.user_image}}"
+                           onerror="this.src='assets/images/admin.png';" alt="">
+                    </span>
+                    <span class="menu-info">
+                      <span class="menu-title">Online Lecture by {{notification.titleName}} {{notification.empFullName}} of {{notification.subjectName}}</span>
+                      <span class="menu-desc">
+                        <i class="material-icons">access_time</i> {{ "2021-02-07 "+ notification.tsFromTime | date:'shortTime' }} - {{ "2021-02-07 "+ notification.tsTillTime | date:'shortTime' }}
+                      </span>
+                      <span class="menu-desc">{{notification.notification_text}}</span>
+                    </span>
+                  </a>
+                  <!--<a href="https://cellbeans.in/anatomy_29122020" target="_blank">&lt;!&ndash; onClick="return false;"&ndash;&gt;-->
+                  <!--<span class="table-img msg-user">-->
+                  <!--<img src="assets/images/user/user1.jpg" alt="">-->
+                  <!--</span>-->
+                  <!--<span class="menu-info">-->
+                  <!--<span class="menu-title">Admin</span>-->
+                  <!--<span class="menu-desc">-->
+                  <!--<i class="material-icons">access_time</i> 14 mins ago-->
+                  <!--</span>-->
+                  <!--<span class="menu-desc">Click for First Year MBBS - Anatomy Session</span>-->
+                  <!--</span>-->
+                  <!--</a>-->
+                  <!--<a href="https://cellbeans.in/biochemistry_29122020" target="_blank">&lt;!&ndash; onClick="return false;"&ndash;&gt;-->
+                  <!--<span class="table-img msg-user">-->
+                  <!--<img src="assets/images/user/user1.jpg" alt="">-->
+                  <!--</span>-->
+                  <!--<span class="menu-info">-->
+                  <!--<span class="menu-title">Admin</span>-->
+                  <!--<span class="menu-desc">-->
+                  <!--<i class="material-icons">access_time</i> 29 mins ago-->
+                  <!--</span>-->
+                  <!--<span class="menu-desc">Click for Second Year MBBS - Biochemistry Session</span>-->
+                  <!--</span>-->
+                  <!--</a>-->
+                </li>
+              </ul>
+            </div>
+            <a class="text-center d-block border-top py-1" href="#" onClick="return false;">Read
+              All Notifications</a>
+          </div>
+        </li>
+        <!-- #END# Notifications-->
+        <li class="nav-item user_profile" ngbDropdown>
+          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
+            <img src={{userImg}} class="rounded-circle" width="32" height="32" alt="User">
+          </a>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li class="body">
+                  <ul class="user_dw_menu">
+                    <li *ngIf="(employeeId != null || studentId != null)">
+                      <!--<a *ngIf="(app.localStorageItem(userDetails.userStudentId) != null)" routerLink="/student/student">-->
+                      <a *ngIf="(employeeId != null)" routerLink="/teacher/profile">
+                        <mat-icon aria-hidden="false" class="mr-2">person</mat-icon>
+                        Profile
+                      </a>
+                      <a *ngIf="(studentId != null)" routerLink="/student/student">
+                        <mat-icon aria-hidden="false" class="mr-2">person</mat-icon>
+                        Profile
+                      </a>
+                    </li>
+                    <!--<li>-->
+                    <!--<a href="#" onClick="return false;">-->
+                    <!--<mat-icon aria-hidden="false" class="mr-2">feedback</mat-icon>Feedback-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a href="#" onClick="return false;">-->
+                    <!--<mat-icon aria-hidden="false" class="mr-2">help</mat-icon>Help-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                      <a routerLink="/password/edit-change-password">
+                        <mat-icon aria-hidden="false" class="mr-2">vpn_key</mat-icon>
+                        Change Password
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" (click)="logout()">
+                        <mat-icon aria-hidden="false" class="mr-2">power_settings_new</mat-icon>
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- #END# Tasks -->
+        <!--<li class="pull-right">-->
+          <!--<button mat-icon-button (click)="toggleRightSidebar()" class="nav-notification-icons js-right-sidebar">-->
+            <!--<mat-icon id="settingBtn">settings</mat-icon>-->
+          <!--</button>-->
+        <!--</li>-->
+      </ul>
+    </div>
+  </div>
+</nav>

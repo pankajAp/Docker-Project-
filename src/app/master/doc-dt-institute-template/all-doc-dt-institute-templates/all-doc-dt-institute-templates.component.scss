@@ -1,0 +1,41 @@
+table {
+  border-collapse: collapse;
+}
+
+th {
+  /* row border */
+  border-bottom: 1px solid #ffa600;
+}
+
+td.mat-cell {
+  /* row padding */
+  padding: 20px 0;
+  border: none;
+}
+
+tr.mat-row {
+  /* row border */
+  border: 1px solid #ffa600;
+}
+
+.btn-tbl-start {
+  background-color: #3a609a;
+  height: 30px !important;
+  width: 30px !important;
+  margin: 2px !important;
+  line-height: 30px !important;
+  color: #fff;
+}
+
+.btn-tbl-view {
+  background-color: #f44336;
+  height: 30px !important;
+  width: 30px !important;
+  margin: 2px !important;
+  line-height: 30px !important;
+  color: #fff;
+}
+
+.mat-raised-button {
+  min-width: 34px;
+}
